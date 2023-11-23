@@ -86,7 +86,7 @@ jobs:
         terragrunt -v
 
     # Plan terragrunt
-    - name: Plan
+    - name: Terragrunt Plan All Stages
       run: terragrunt run-all plan
 
     # Deploy terragrunt
