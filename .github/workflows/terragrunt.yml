@@ -75,7 +75,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Initialize Terragrunt
+    - name: Initialize Terraform
       run: terraform init
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
@@ -85,14 +85,13 @@ jobs:
         sudo chmod +x /bin/terragrunt
         terragrunt -v
 
-        
     # Plan terragrunt
     - name: Plan
       run: terragrunt run-all plan
 
     # Deploy terragrunt
     - name: Deploy Beta Stage
-      run: terragrunt apply
+      run: terragrunt apply --terragrunt-non-interactive
       working-directory: ./stages/beta/lambdas
 
     
