@@ -83,9 +83,7 @@ jobs:
 
     # Plan terragrunt
     - name: Plan
-      uses: gruntwork-io/terragrunt-action@v2
-      with:
-        tg_command: 'plan'
+      run: terragrunt run-all plan
 
     # Deploy terragrunt
     - name: Deploy Beta
