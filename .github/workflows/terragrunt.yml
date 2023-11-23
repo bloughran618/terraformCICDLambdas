@@ -91,7 +91,7 @@ jobs:
 
     # Deploy terragrunt
     - name: Deploy Beta Stage
-      run: terragrunt apply --terragrunt-non-interactive
+      run: terragrunt apply -auto-approve
       working-directory: ./stages/beta/lambdas
 
     
