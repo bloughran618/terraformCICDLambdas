@@ -78,6 +78,7 @@ jobs:
       with:
         tf_version: ${{ env.tf_version }}
         tg_version: ${{ env.tg_version }}
+        tg_dir: ./stages/beta/lambdas
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     # Plan terragrunt
