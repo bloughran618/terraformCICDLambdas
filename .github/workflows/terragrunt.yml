@@ -74,7 +74,7 @@ jobs:
 
     # Plan terragrunt
     - name: Terragrunt Plan All Stages
-      run: terragrunt run-all plan
+      run: terragrunt run-all plan --terragrunt-exclude-dir ./stages
 
     # Deploy terragrunt
     - name: Deploy Beta Stage
