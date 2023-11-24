@@ -1,5 +1,5 @@
 resource "aws_iam_role" "lambda_execution_role" {
-  name = "lambda_execution_role_${var.stage}"
+  name = "lambda_terraform_execution_role_${var.stage}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",

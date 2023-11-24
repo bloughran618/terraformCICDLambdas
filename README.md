@@ -6,10 +6,12 @@ beta/gamma/prod environments managed by terragrunt
 ### Deploying resources
 
 Navigate to the environment that you want to deploy (e.g. ./stages/beta/lambdas/)
+
 `terragrunt apply`
 
 OR if you want to be wild and apply to all stages from the root directory
-`terragrunt run-all apply`
+
+`terragrunt run-all apply --terragrunt-exclude-dir ./stages`
 
 ### Testing the lambda in pkg1
 
