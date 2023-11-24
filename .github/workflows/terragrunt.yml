@@ -76,9 +76,36 @@ jobs:
     - name: Terragrunt Plan All Stages
       run: terragrunt run-all plan --terragrunt-exclude-dir ./stages
 
-    # Deploy terragrunt
+    # Deploy terragrunt to beta
     - name: Deploy Beta Stage
       run: terragrunt apply -auto-approve
       working-directory: ./stages/beta/lambdas
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r ./lambdas/python/pkg1/src/requirements.txt  
+        pip install unittest
+
+    - name: Run unit tests
+      run: |
+        python -m unittest lambdas/python/pkg1/tst/test_index.py
+
+    - name: Confirm tests passed
+      run: |
+        if [ $? -ne 0 ]; then
+          echo "Tests failed. Exiting..."
+          exit 1
+        else
+          echo "All tests passed!"
+        fi
+
+    - name: Deploy all regions
+      run: terragrunt run-all apply --terragrunt-exclude-dir ./stages
 
     
