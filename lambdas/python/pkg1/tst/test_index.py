@@ -12,7 +12,7 @@ class TestLambdaHandler(unittest.TestCase):
 
         result = lambda_handler(event, context)
 
-        self.assertEqual(result["message"], "Hello None!")
+        self.assertEqual(result["message"], "Have fun at Friendsgiving None!")
 
     def test_lambda_handler_returns_hello_lambda_body(self):
         event = {"key1": "Brian"}
@@ -20,7 +20,7 @@ class TestLambdaHandler(unittest.TestCase):
 
         result = lambda_handler(event, context)
 
-        self.assertEqual(result["message"], "Hello Brian!")
+        self.assertEqual(result["message"], "Have fun at Friendsgiving Brian!")
 
 
 if __name__ == "__main__":
