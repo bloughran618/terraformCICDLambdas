@@ -74,6 +74,6 @@ jobs:
         fi
 
     - name: Deploy all regions
-      run: terragrunt run-all apply --terragrunt-exclude-dir ./stages -auto-approve
+      run: terragrunt run-all apply --terragrunt-non-interactive --terragrunt-exclude-dir ./stages
 
     
