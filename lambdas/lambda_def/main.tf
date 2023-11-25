@@ -27,8 +27,9 @@ resource "null_resource" "install_dependencies" {
   }
 
   triggers = {
-    dependencies_versions = filemd5("${var.filepath}/requirements.txt")
-    source_versions = filemd5("${var.filepath}/index.py")
+#    dependencies_versions = filemd5("${var.filepath}/requirements.txt")
+#    source_versions = filemd5("${var.filepath}/index.py")
+    timestamp = timestamp()
   }
 }
 
