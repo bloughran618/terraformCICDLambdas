@@ -19,13 +19,6 @@ resource "aws_lambda_function" "example_lambda" {
     module.lambda_role.attach_iam_policy_to_iam_role,
     data.archive_file.zip_the_python_code
   ]
-
-  environment {
-    variables = {
-      KEY1 = "value1",
-      KEY2 = "value2",
-    }
-  }
 }
 
 resource "null_resource" "install_dependencies" {
