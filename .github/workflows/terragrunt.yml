@@ -22,6 +22,7 @@ jobs:
     name: 'Terraform Plan'
     runs-on: ubuntu-latest
     environment: production
+    needs: checkout
 
     steps:
     - name: Configure AWS Credentials
@@ -54,6 +55,7 @@ jobs:
     name: 'Unittests'
     runs-on: ubuntu-latest
     environment: production
+    needs: checkout
 
     steps:
     - name: Set up Python
@@ -84,6 +86,7 @@ jobs:
     name: 'Deploy All Regions'
     runs-on: ubuntu-latest
     environment: production
+    needs: [terraform_config, run_tests]
 
     steps:
     - name: Deploy all regions
