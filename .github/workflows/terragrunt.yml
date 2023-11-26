@@ -9,21 +9,21 @@ permissions:
   contents: read
 
 jobs:
-  terragrunt:
-    name: 'Terragrunt'
+  checkout:
+    name: 'Checkout'
     runs-on: ubuntu-latest
     environment: production
 
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+  terraform_config:
+    name: 'Terraform Plan'
+    runs-on: ubuntu-latest
+    environment: production
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -49,7 +49,13 @@ jobs:
     - name: Deploy Beta Stage
       run: terragrunt apply -auto-approve
       working-directory: ./stages/beta/lambdas
+  
+  run_tests:
+    name: 'Unittests'
+    runs-on: ubuntu-latest
+    environment: production
 
+    steps:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -73,6 +79,13 @@ jobs:
           echo "All tests passed!"
         fi
 
+
+  deploy:
+    name: 'Deploy All Regions'
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
     - name: Deploy all regions
       run: terragrunt run-all apply --terragrunt-non-interactive --terragrunt-exclude-dir ./stages
 
